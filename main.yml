@@ -1,0 +1,30 @@
+---
+
+# Role Version-check that check Version of python,docker,ansible
+# Role memory_check that Check Size of Ram and harddisk
+# Role port-checking checking the port wheather its connecting or not
+
+
+ - name: pre-request
+   hosts: check_node
+
+  
+ - hosts: check_node
+   become: yes
+   tasks:
+     - include_vars:  connection-details.yml
+     - include_tasks: roles/app/tasks/server.yml
+
+ - hosts: check_node
+   become: yes
+   tasks:
+     - include_vars:  connection-details.yml
+     - include_tasks: roles/app/tasks/client.yml
+
+ - hosts: check_node
+   become: yes
+   tasks:
+     - include_vars:  connection-details.yml
+     - include_tasks: roles/app/tasks/cleanenv.yml
+
+
